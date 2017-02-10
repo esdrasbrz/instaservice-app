@@ -22,7 +22,7 @@ export class AuthService {
             'username': username,
             'password': password
         }
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
 
         let body = JSON.stringify(param);
         let options = new RequestOptions({ headers: headers });
@@ -30,8 +30,6 @@ export class AuthService {
             this.http.post(this.configService.config.apis.usuarios + 'usuarios/check/', body, options)
                 .map(res => res.json())
                 .subscribe(data => {
-                    console.log(data);
-
                     if (data.auth) {
                         this.usuario = data.usuario;
                     }
