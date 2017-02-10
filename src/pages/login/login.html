@@ -1,0 +1,29 @@
+<ion-content class="login-content" padding>
+    <ion-card>
+        <ion-card-header>
+            <h1 class='login-header'><ion-icon name="log-in"></ion-icon> Login</h1>
+        </ion-card-header>
+
+        <ion-card-content>
+            <form (ngSubmit)="login()" #loginForm="ngForm">
+
+                <ion-list>
+                    <ion-item>
+                        <ion-label floating>Nome de Usuário</ion-label>
+                        <ion-input type='text' name='username' [(ngModel)]='username' required autofocus></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label floating>Senha</ion-label>
+                        <ion-input type='password' name='password' [(ngModel)]='password' required></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <button ion-button full type='submit' [disabled]='!loginForm.form.valid'>Login</button>
+                    </ion-item>
+                </ion-list>
+
+            </form>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

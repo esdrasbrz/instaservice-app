@@ -21,6 +21,8 @@
   </platform>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
+  <preference name="StatusBarOverlaysWebView" value="false"/>
+  <preference name="StatusBarBackgroundColor" value="#502CA7"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
