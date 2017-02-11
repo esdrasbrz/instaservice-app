@@ -17,6 +17,7 @@ export class AuthService {
     public usuario: any = {
         id: '',
         username: '',
+        password: '',
         nome: '',
         bio: '',
         basic: ''
@@ -47,9 +48,11 @@ export class AuthService {
                 .subscribe(data => {
                     if (data.auth) {
                         data.usuario['basic'] = 'Basic ' + btoa(username + ":" + password);
+
                         this.usuario = data.usuario;
+                        this.usuario.password = password;
                         this.storage.set('auth', true);
-                        this.storage.set('usuario', data.usuario);
+                        this.storage.set('usuario', this.usuario);
                     }
 
                     resolve(data);

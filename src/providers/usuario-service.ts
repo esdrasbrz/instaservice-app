@@ -39,6 +39,33 @@ export class UsuarioService {
         });
     }
 
+    public alterar(dados) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        let body = JSON.stringify(dados);
+        let options = new RequestOptions({ headers: headers });
+        return new Promise(resolve => {
+            this.http.put(this.configService.config.apis.usuarios + 'usuarios/' + this.authService.usuario.id, body, options)
+                .map(res => res.json())
+                .subscribe(data => {
+                    if (dados.password) {
+                        this.authService.usuario.password = dados.password;
+                    }
+
+                    this.authService.login(this.authService.usuario.username, this.authService.usuario.password);
+                    resolve(data);
+                },
+                err => {
+                    console.log(JSON.stringify(err));
+                    resolve({
+                        err: 'Um erro ocorreu!'
+                    });
+                });
+        });
+    }
+
     public attSeguidores() {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');

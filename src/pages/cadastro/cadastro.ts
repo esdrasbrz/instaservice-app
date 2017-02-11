@@ -32,8 +32,6 @@ export class CadastroPage {
         this.usuarioService.cadastrar(this.usuario)
             .then(data => {
                 setTimeout(() => {
-
-
                     if (data['err']) {
                         if (data['err']['code'] == "ER_DUP_ENTRY") {
                             this.showError("Nome de usuário não se encontra disponível!");

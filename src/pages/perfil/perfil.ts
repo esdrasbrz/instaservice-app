@@ -32,7 +32,41 @@ export class PerfilPage {
     }
 
     public salvar() {
+        this.showLoading();
+        let dados = {};
+        dados['nome'] = this.nome;
+        dados['bio'] = this.bio;
 
+        if (this.alterarSenha) {
+            // precisa checar a senha antiga
+            if (this.senhaAntiga !== this.authService.usuario.password) {
+                this.showError("A senha antiga não confere!");
+                return;
+            }
+
+            dados['password'] = this.senha;
+        }
+
+        this.usuarioService.alterar(dados)
+            .then(data => {
+                setTimeout(() => {
+                    if (data['err']) {
+                        this.showError(data['err']);
+                    } else {
+                        this.loading.dismiss();
+
+                        this.navCtrl.pop();
+                        this.alertCtrl.create({
+                            title: 'Sucesso',
+                            subTitle: 'Perfil salvo com sucesso!',
+                            buttons: ['OK']
+                        }).present();
+                    }
+                });
+            },
+            err => {
+                this.showError(err);
+            });
     }
 
     showLoading() {
