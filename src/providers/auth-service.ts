@@ -53,4 +53,10 @@ export class AuthService {
                 });
         });
     }
+
+    public logout() {
+        this.usuario = null;
+        this.storage.set('auth', false);
+        this.storage.remove('usuario');
+    }
 }

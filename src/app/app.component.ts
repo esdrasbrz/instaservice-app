@@ -6,8 +6,6 @@ import { Storage } from '@ionic/storage';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 
-import { AuthService } from '../providers/auth-service';
-
 
 @Component({
   templateUrl: 'app.html'

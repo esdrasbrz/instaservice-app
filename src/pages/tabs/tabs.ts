@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
+import { UsuarioPage } from '../usuario/usuario';
 
 /*
   Generated class for the Tabs page.
@@ -17,7 +18,7 @@ export class TabsPage {
     tabs = [
         {icon: "home", root: HomePage},
         {icon: "search", root: HomePage},
-        {icon: "person", root: HomePage}
+        {icon: "person", root: UsuarioPage}
     ];
 
     constructor(public navCtrl: NavController, public navParams: NavParams) {}
