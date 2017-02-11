@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, LoadingController, Loading }
 import { AuthService } from '../../providers/auth-service';
 
 import { HomePage } from '../home/home';
+import { CadastroPage } from '../cadastro/cadastro';
 
 /*
   Generated class for the Login page.
@@ -39,6 +40,10 @@ export class LoginPage {
                     this.showError('Acesso não permitido!');
                 }
             });
+    }
+
+    public abrirCadastro() {
+        this.navCtrl.push(CadastroPage);
     }
 
     showLoading() {

@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Cadastro
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="cadastro-content" padding>
+    <form (ngSubmit)="cadastrar()" #cadastroForm="ngForm">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Nome</ion-label>
+                <ion-input type='text' name='nome' [(ngModel)]='usuario.nome' autofocus></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Nome de Usuário (*)</ion-label>
+                <ion-input type='text' name='username' [(ngModel)]='usuario.username' required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Senha (*)</ion-label>
+                <ion-input type='password' name='password' [(ngModel)]='usuario.password' required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Senha Confirmação (*)</ion-label>
+                <ion-input type='password' name='password' [(ngModel)]='passConfirm' required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <button ion-button full type='submit' [disabled]='!cadastroForm.form.valid || usuario.password !== passConfirm'>Enviar</button>
+            </ion-item>
+        </ion-list>
+
+    </form>
+</ion-content>
