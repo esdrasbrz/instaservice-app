@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { Storage } from '@ionic/storage';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
@@ -10,6 +11,7 @@ import { CadastroPage } from '../pages/cadastro/cadastro';
 import { ConfigService } from '../providers/config-service';
 import { AuthService } from '../providers/auth-service';
 import { UsuarioService } from '../providers/usuario-service';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { UsuarioService } from '../providers/usuario-service';
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
+      Storage,
       ConfigService,
       AuthService,
       UsuarioService,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
 
 import { ConfigService } from './config-service';
 
@@ -14,7 +15,14 @@ import { ConfigService } from './config-service';
 export class AuthService {
     public usuario: any;
 
-    constructor(public http: Http, private configService: ConfigService) {
+    constructor(public http: Http, private configService: ConfigService, private storage: Storage) {
+        this.storage.get('auth').then((auth) => {
+            if (auth) {
+                this.storage.get('usuario').then((usuario) => {
+                    this.usuario = usuario;
+                });
+            }
+        });
     }
 
     public login(username: string, password: string) {
@@ -32,6 +40,8 @@ export class AuthService {
                 .subscribe(data => {
                     if (data.auth) {
                         this.usuario = data.usuario;
+                        this.storage.set('auth', true);
+                        this.storage.set('usuario', data.usuario);
                     }
 
                     resolve(data);
