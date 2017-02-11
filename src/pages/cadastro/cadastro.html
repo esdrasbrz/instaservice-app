@@ -11,12 +11,12 @@
         <ion-list>
             <ion-item>
                 <ion-label floating>Nome</ion-label>
-                <ion-input type='text' name='nome' [(ngModel)]='usuario.nome' autofocus></ion-input>
+                <ion-input type='text' name='nome' [(ngModel)]='usuario.nome' maxlength='100' autofocus></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label floating>Nome de Usuário (*)</ion-label>
-                <ion-input type='text' name='username' [(ngModel)]='usuario.username' required></ion-input>
+                <ion-input type='text' name='username' [(ngModel)]='usuario.username' maxlength='50' required></ion-input>
             </ion-item>
 
             <ion-item>

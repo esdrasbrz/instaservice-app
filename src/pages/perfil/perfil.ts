@@ -1,39 +1,38 @@
 import { Component } from '@angular/core';
-import { App, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 
-import { AuthService } from '../../providers/auth-service';
 import { UsuarioService } from '../../providers/usuario-service';
-
-import { LoginPage } from '../login/login';
-import { PerfilPage } from '../perfil/perfil';
+import { AuthService } from '../../providers/auth-service';
 
 /*
-  Generated class for the Usuario page.
+  Generated class for the Perfil page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-usuario',
-  templateUrl: 'usuario.html'
+  selector: 'page-perfil',
+  templateUrl: 'perfil.html'
 })
-export class UsuarioPage {
+export class PerfilPage {
     loading: Loading;
 
+    bio: string;
+    nome: string;
+    senhaAntiga: string;
+    senha: string;
+    alterarSenha: boolean;
+
     constructor(public navCtrl: NavController, public navParams: NavParams,
-                private authService: AuthService, private alertCtrl: AlertController,
-                private loadingCtrl: LoadingController, private app: App,
-                private usuarioService: UsuarioService) {
-        this.usuarioService.attAll();
+                private alertCtrl: AlertController, private loadingCtrl: LoadingController,
+                private usuarioService: UsuarioService, private authService: AuthService) {
+        this.bio = authService.usuario.bio;
+        this.nome = authService.usuario.nome;
+        this.alterarSenha = false;
     }
 
-    public logout() {
-        this.authService.logout();
-        this.app.getRootNav().setRoot(LoginPage);
-    }
+    public salvar() {
 
-    public abrirPerfil() {
-        this.navCtrl.push(PerfilPage);
     }
 
     showLoading() {

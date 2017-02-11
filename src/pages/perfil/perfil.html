@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Editar {{ authService.usuario.username }}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+            Apresentação
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-item>
+                <ion-label floating>Nome</ion-label>
+                <ion-input name="nome" [(ngModel)]="nome" maxlength="100"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Bio</ion-label>
+                <ion-textarea name="bio" [(ngModel)]="bio"></ion-textarea>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            Dados de Acesso
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-item>
+                <ion-label> Alterar Senha</ion-label>
+                <ion-toggle [(ngModel)]="alterarSenha"></ion-toggle>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Senha Antiga</ion-label>
+                <ion-input type='password' [(ngModel)]="senhaAntiga" [disabled]="!alterarSenha"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Nova Senha</ion-label>
+                <ion-input type='password' [(ngModel)]="senha" [disabled]="!alterarSenha"></ion-input>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+    <button ion-button block (click)="salvar()">Salvar</button>
+</ion-content>
