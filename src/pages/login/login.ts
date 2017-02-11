@@ -3,7 +3,7 @@ import { NavController, NavParams, AlertController, LoadingController, Loading }
 
 import { AuthService } from '../../providers/auth-service';
 
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 import { CadastroPage } from '../cadastro/cadastro';
 
 /*
@@ -33,8 +33,7 @@ export class LoginPage {
                 if (data['auth']) {
                     setTimeout(() => {
                         this.loading.dismiss();
-                        console.log(this.authService.usuario);
-                        this.navCtrl.setRoot(HomePage);
+                        this.navCtrl.setRoot(TabsPage);
                     });
                 } else {
                     this.showError('Acesso não permitido!');

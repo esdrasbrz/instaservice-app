@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+import { TabsPage } from '../pages/tabs/tabs';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
@@ -16,6 +17,7 @@ import { UsuarioService } from '../providers/usuario-service';
     HomePage,
     LoginPage,
     CadastroPage,
+    TabsPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,6 +28,7 @@ import { UsuarioService } from '../providers/usuario-service';
     HomePage,
     LoginPage,
     CadastroPage,
+    TabsPage,
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},
