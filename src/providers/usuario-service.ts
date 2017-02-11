@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { ConfigService } from './config-service';
+import { AuthService } from './auth-service';
 
 /*
   Generated class for the UsuarioService provider.
@@ -12,7 +13,11 @@ import { ConfigService } from './config-service';
 */
 @Injectable()
 export class UsuarioService {
-    constructor(public http: Http, private configService: ConfigService) {
+    seguidores: any = [];
+    seguindo: any = [];
+
+    constructor(public http: Http, private configService: ConfigService,
+                private authService: AuthService) {
     }
 
     public cadastrar(usuario) {
@@ -32,5 +37,52 @@ export class UsuarioService {
                     });
                 });
         });
+    }
+
+    public attSeguidores() {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        return new Promise(resolve => {
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.authService.usuario.id + '/seguidores/', { headers: headers })
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.seguidores = data;
+                    resolve(data);
+                },
+                err => {
+                    this.seguidores = [];
+                    resolve({
+                        err: 'Erro ao atualizar seguidores!'
+                    });
+                });
+        });
+    }
+
+    public attSeguindo() {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        return new Promise(resolve => {
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.authService.usuario.id + '/seguindo/', { headers: headers })
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.seguindo = data;
+                    resolve(data);
+                },
+                err => {
+                    this.seguindo = [];
+                    resolve({
+                        err: 'Erro ao atualizar seguindo!'
+                    });
+                });
+        });
+    }
+
+    public attAll() {
+        this.attSeguidores();
+        this.attSeguindo();
     }
 }

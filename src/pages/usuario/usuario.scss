@@ -1,3 +1,9 @@
 page-usuario {
+    .numeros {
+        font-weight: bold;
+    }
 
+    .numeros-label {
+        color: color($colors, light);
+    }
 }

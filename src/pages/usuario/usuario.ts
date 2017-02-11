@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { App, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
 
 import { AuthService } from '../../providers/auth-service';
+import { UsuarioService } from '../../providers/usuario-service';
 
 import { LoginPage } from '../login/login';
 
@@ -20,7 +21,9 @@ export class UsuarioPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private authService: AuthService, private alertCtrl: AlertController,
-                private loadingCtrl: LoadingController, private app: App) {
+                private loadingCtrl: LoadingController, private app: App,
+                private usuarioService: UsuarioService) {
+        this.usuarioService.attAll();
     }
 
     public logout() {

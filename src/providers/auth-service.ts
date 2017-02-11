@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
 import { ConfigService } from './config-service';
+import { UsuarioService } from './usuario-service';
 
 /*
   Generated class for the AuthService provider.
@@ -13,7 +14,13 @@ import { ConfigService } from './config-service';
 */
 @Injectable()
 export class AuthService {
-    public usuario: any;
+    public usuario: any = {
+        id: '',
+        username: '',
+        nome: '',
+        bio: '',
+        basic: ''
+    };
 
     constructor(public http: Http, private configService: ConfigService, private storage: Storage) {
         this.storage.get('auth').then((auth) => {
@@ -39,6 +46,7 @@ export class AuthService {
                 .map(res => res.json())
                 .subscribe(data => {
                     if (data.auth) {
+                        data.usuario['basic'] = 'Basic ' + btoa(username + ":" + password);
                         this.usuario = data.usuario;
                         this.storage.set('auth', true);
                         this.storage.set('usuario', data.usuario);
@@ -55,7 +63,6 @@ export class AuthService {
     }
 
     public logout() {
-        this.usuario = null;
         this.storage.set('auth', false);
         this.storage.remove('usuario');
     }

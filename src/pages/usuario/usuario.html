@@ -1,8 +1,7 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-title>
-            <ion-icon name="camera"></ion-icon>
-            InstaService
+            {{ authService.usuario.username }}
         </ion-title>
 
         <ion-buttons end>
@@ -14,4 +13,37 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-row>
+        <ion-col class='numeros'>
+            10
+        </ion-col>
+        <ion-col class='numeros'>
+            {{ usuarioService.seguidores.length }}
+        </ion-col>
+        <ion-col class='numeros'>
+            {{ usuarioService.seguindo.length }}
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col class='numeros-label'>
+            Publicações
+        </ion-col>
+        <ion-col class='numeros-label'>
+            Seguidores
+        </ion-col>
+        <ion-col class='numeros-label'>
+            Seguindo
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <button ion-button color="light" outline block small>Editar seu perfil</button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+            {{ authService.usuario.nome }}
+        </ion-col>
+    </ion-row>
 </ion-content>
