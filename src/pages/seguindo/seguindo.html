@@ -15,8 +15,8 @@
                 </ion-col>
                 <ion-col width-33 >
                     <div [ngSwitch]="usuarioService.userSeguindo.includes(usuario.id)">
-                        <button ion-button small block outline *ngSwitchCase="true">Seguindo</button>
-                        <button ion-button small block *ngSwitchCase="false">Seguir</button>
+                        <button ion-button small block outline *ngSwitchCase="true" (click)="removerSeguir(usuario.id)">Seguindo</button>
+                        <button ion-button small block *ngSwitchCase="false" (click)="seguir(usuario.id)">Seguir</button>
                     </div>
                 </ion-col>
             </ion-row>

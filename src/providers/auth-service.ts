@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
 import { ConfigService } from './config-service';
-import { UsuarioService } from './usuario-service';
 
 /*
   Generated class for the AuthService provider.

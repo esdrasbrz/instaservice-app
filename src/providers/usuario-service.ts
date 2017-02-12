@@ -71,7 +71,6 @@ export class UsuarioService {
                     resolve(data);
                 },
                 err => {
-                    console.log(JSON.stringify(err));
                     resolve({
                         err: 'Um erro ocorreu!'
                     });
@@ -144,6 +143,51 @@ export class UsuarioService {
                         });
                     });
             });
+        });
+    }
+
+    public seguir(id) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        let body = JSON.stringify({});
+        let options = new RequestOptions({ headers: headers });
+        return new Promise(resolve => {
+            this.http.post(this.configService.config.apis.usuarios + 'arestas/' + this.authService.usuario.id + "/" + id, body, options)
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.userSeguindo.push(id);
+
+                    resolve(data);
+                },
+                err => {
+                    resolve({
+                        err: 'Um erro ocorreu!'
+                    });
+                });
+        });
+    }
+
+    public removerSeguir(id) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        let options = new RequestOptions({ headers: headers });
+        return new Promise(resolve => {
+            this.http.delete(this.configService.config.apis.usuarios + 'arestas/' + this.authService.usuario.id + "/" + id, options)
+                .map(res => res.json())
+                .subscribe(data => {
+                    delete this.userSeguindo[this.userSeguindo.indexOf(id)];
+
+                    resolve(data);
+                },
+                err => {
+                    resolve({
+                        err: 'Um erro ocorreu!'
+                    });
+                });
         });
     }
 
