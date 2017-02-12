@@ -9,6 +9,8 @@ import { LoginPage } from '../pages/login/login';
 import { CadastroPage } from '../pages/cadastro/cadastro';
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { PerfilPage } from '../pages/perfil/perfil';
+import { SeguidoresPage } from '../pages/seguidores/seguidores';
+import { SeguindoPage } from '../pages/seguindo/seguindo';
 
 import { ConfigService } from '../providers/config-service';
 import { AuthService } from '../providers/auth-service';
@@ -24,6 +26,8 @@ import { UsuarioService } from '../providers/usuario-service';
     TabsPage,
     UsuarioPage,
     PerfilPage,
+    SeguidoresPage,
+    SeguindoPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,6 +41,8 @@ import { UsuarioService } from '../providers/usuario-service';
     TabsPage,
     UsuarioPage,
     PerfilPage,
+    SeguidoresPage,
+    SeguindoPage,
   ],
   providers: [
       {provide: ErrorHandler, useClass: IonicErrorHandler},

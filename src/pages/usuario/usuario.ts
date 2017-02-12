@@ -6,6 +6,8 @@ import { UsuarioService } from '../../providers/usuario-service';
 
 import { LoginPage } from '../login/login';
 import { PerfilPage } from '../perfil/perfil';
+import { SeguidoresPage } from '../seguidores/seguidores';
+import { SeguindoPage } from '../seguindo/seguindo';
 
 /*
   Generated class for the Usuario page.
@@ -33,6 +35,14 @@ export class UsuarioPage {
 
     public abrirPerfil() {
         this.navCtrl.push(PerfilPage);
+    }
+
+    public abrirSeguidores() {
+        this.navCtrl.push(SeguidoresPage);
+    }
+
+    public abrirSeguindo() {
+        this.navCtrl.push(SeguindoPage);
     }
 
     showLoading() {

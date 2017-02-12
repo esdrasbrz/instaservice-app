@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Storage } from '@ionic/storage';
 
 import { ConfigService } from './config-service';
 import { AuthService } from './auth-service';
@@ -25,8 +26,11 @@ export class UsuarioService {
     seguidores: any = [];
     seguindo: any = [];
 
+    userSeguindo: Array<number> = [];
+
     constructor(public http: Http, private configService: ConfigService,
-                private authService: AuthService) {
+                private authService: AuthService, private storage: Storage) {
+        this.attUserSeguindo();
     }
 
     public cadastrar(usuario) {
@@ -114,6 +118,32 @@ export class UsuarioService {
                         err: 'Erro ao atualizar seguindo!'
                     });
                 });
+        });
+    }
+
+    public attUserSeguindo() {
+        return new Promise(resolve => {
+            this.storage.get('usuario').then((usuario) => {
+                let headers = new Headers();
+                headers.append('Content-Type', 'application/json');
+                headers.append('Authorization', usuario.basic);
+
+                this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + usuario.id + '/seguindo/', { headers: headers })
+                    .map(res => res.json())
+                    .subscribe(data => {
+                        for (let user of data) {
+                            this.userSeguindo.push(user.id);
+                        }
+
+                        resolve(data);
+                    },
+                    err => {
+                        this.userSeguindo = [];
+                        resolve({
+                            err: 'Erro ao atualizar seguindo!'
+                        });
+                    });
+            });
         });
     }
 

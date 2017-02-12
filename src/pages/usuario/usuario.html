@@ -17,10 +17,10 @@
         <ion-col class='numeros'>
             10
         </ion-col>
-        <ion-col class='numeros'>
+        <ion-col class='numeros' (click)="abrirSeguidores()">
             {{ usuarioService.seguidores.length }}
         </ion-col>
-        <ion-col class='numeros'>
+        <ion-col class='numeros' (click)="abrirSeguindo()">
             {{ usuarioService.seguindo.length }}
         </ion-col>
     </ion-row>
@@ -28,10 +28,10 @@
         <ion-col class='numeros-label'>
             Publicações
         </ion-col>
-        <ion-col class='numeros-label'>
+        <ion-col class='numeros-label' (click)="abrirSeguidores()">
             Seguidores
         </ion-col>
-        <ion-col class='numeros-label'>
+        <ion-col class='numeros-label' (click)="abrirSeguindo()">
             Seguindo
         </ion-col>
     </ion-row>

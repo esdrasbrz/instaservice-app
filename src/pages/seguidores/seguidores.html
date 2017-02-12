@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Seguidores</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let usuario of usuarioService.seguidores">
+            <ion-row>
+                <ion-col width-67>
+                    <h2 class="username">{{ usuario.username }}</h2>
+                    <p>{{ usuario.nome }}</p>
+                </ion-col>
+                <ion-col width-33 >
+                    <div [ngSwitch]="usuarioService.userSeguindo.includes(usuario.id)">
+                        <button ion-button small block outline *ngSwitchCase="true">Seguindo</button>
+                        <button ion-button small block *ngSwitchCase="false">Seguir</button>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+</ion-content>
