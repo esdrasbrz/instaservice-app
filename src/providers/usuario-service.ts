@@ -13,6 +13,15 @@ import { AuthService } from './auth-service';
 */
 @Injectable()
 export class UsuarioService {
+    public usuario: any = {
+        id: '',
+        username: '',
+        password: '',
+        nome: '',
+        bio: '',
+        basic: ''
+    };
+
     seguidores: any = [];
     seguindo: any = [];
 
@@ -72,7 +81,7 @@ export class UsuarioService {
         headers.append('Authorization', this.authService.usuario.basic);
 
         return new Promise(resolve => {
-            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.authService.usuario.id + '/seguidores/', { headers: headers })
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.usuario.id + '/seguidores/', { headers: headers })
                 .map(res => res.json())
                 .subscribe(data => {
                     this.seguidores = data;
@@ -93,7 +102,7 @@ export class UsuarioService {
         headers.append('Authorization', this.authService.usuario.basic);
 
         return new Promise(resolve => {
-            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.authService.usuario.id + '/seguindo/', { headers: headers })
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.usuario.id + '/seguindo/', { headers: headers })
                 .map(res => res.json())
                 .subscribe(data => {
                     this.seguindo = data;

@@ -6,4 +6,12 @@ page-usuario {
     .numeros-label {
         color: color($colors, light);
     }
+
+    .nome {
+        font-weight: bold;
+    }
+
+    .bio {
+        color: color($colors, light);
+    }
 }

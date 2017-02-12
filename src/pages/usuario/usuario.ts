@@ -24,7 +24,6 @@ export class UsuarioPage {
                 private authService: AuthService, private alertCtrl: AlertController,
                 private loadingCtrl: LoadingController, private app: App,
                 private usuarioService: UsuarioService) {
-        this.usuarioService.attAll();
     }
 
     public logout() {

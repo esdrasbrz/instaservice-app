@@ -1,3 +1,5 @@
 <ion-tabs>
-  <ion-tab *ngFor='let tab of tabs' [root]="tab.root" tabIcon="{{ tab.icon }}"></ion-tab>
+    <ion-tab [root]="tabHome" tabIcon="home" (ionSelect)="onHome()"></ion-tab>
+    <ion-tab [root]="tabPesquisar" tabIcon="search" (ionSelect)="onPesquisar()"></ion-tab>
+    <ion-tab [root]="tabUsuario" tabIcon="person" (ionSelect)="onUsuario()"></ion-tab>
 </ion-tabs>

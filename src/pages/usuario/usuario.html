@@ -1,10 +1,10 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-title>
-            {{ authService.usuario.username }}
+            {{ usuarioService.usuario.username }}
         </ion-title>
 
-        <ion-buttons end>
+        <ion-buttons end *ngIf="usuarioService.usuario.id == authService.usuario.id">
             <button ion-button icon-only (click)="logout()">
                 <ion-icon name="log-out"></ion-icon>
             </button>
@@ -37,13 +37,18 @@
     </ion-row>
     <ion-row>
         <ion-col>
-            <button ion-button color="light" outline block small (click)="abrirPerfil()">Editar seu perfil</button>
+            <button ion-button color="light" outline block small (click)="abrirPerfil()" *ngIf="usuarioService.usuario.id == authService.usuario.id">Editar seu perfil</button>
         </ion-col>
     </ion-row>
 
     <ion-row>
+        <ion-col class='nome'>
+            {{ usuarioService.usuario.nome }}
+        </ion-col>
+    </ion-row>
+    <ion-row>
         <ion-col>
-            {{ authService.usuario.nome }}
+            <pre class='bio'>{{ usuarioService.usuario.bio }}</pre>
         </ion-col>
     </ion-row>
 </ion-content>
