@@ -14,6 +14,8 @@ import { AuthService } from './auth-service';
 */
 @Injectable()
 export class UsuarioService {
+    public usuarios: Array<any> = [];
+
     public usuario: any = {
         id: '',
         username: '',
@@ -32,6 +34,27 @@ export class UsuarioService {
     constructor(public http: Http, private configService: ConfigService,
                 private authService: AuthService, private storage: Storage) {
         this.attUserSeguindo();
+    }
+
+    public pesquisar(query) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        return new Promise(resolve => {
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/', { headers: headers })
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.usuarios = data;
+                    resolve(data);
+                },
+                err => {
+                    this.usuarios = [];
+                    resolve({
+                        err: 'Erro ao atualizar seguidores!'
+                    });
+                });
+        });
     }
 
     public cadastrar(usuario) {

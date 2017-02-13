@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-searchbar (ionInput)="pesquisar()" [(ngModel)]="query"></ion-searchbar>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let usuario of usuarioService.usuarios">
+            <ion-row>
+                <ion-col (click)="selUsuario(usuario)">
+                    <h2 class="username">{{ usuario.username }}</h2>
+                    <p>{{ usuario.nome }}</p>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+</ion-content>

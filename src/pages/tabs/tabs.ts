@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { UsuarioPage } from '../usuario/usuario';
+import { PesquisaPage } from '../pesquisa/pesquisa';
 
 import { UsuarioService } from '../../providers/usuario-service';
 import { AuthService } from '../../providers/auth-service';
@@ -19,7 +20,7 @@ import { AuthService } from '../../providers/auth-service';
 })
 export class TabsPage {
     tabHome = HomePage;
-    tabPesquisar = HomePage;
+    tabPesquisar = PesquisaPage;
     tabUsuario = UsuarioPage;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
