@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { UsuarioService } from '../../providers/usuario-service';
+import { AuthService } from '../../providers/auth-service';
+
+import { UsuarioPage } from '../usuario/usuario';
 
 /*
   Generated class for the Seguidores page.
@@ -16,7 +19,8 @@ import { UsuarioService } from '../../providers/usuario-service';
 export class SeguidoresPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
-                private usuarioService: UsuarioService, private alertCtrl: AlertController) {}
+                private usuarioService: UsuarioService, private alertCtrl: AlertController,
+                private authService: AuthService) {}
 
     public seguir(id) {
         this.usuarioService.seguir(id)
@@ -40,6 +44,12 @@ export class SeguidoresPage {
             (err) => {
                 this.showError(err);
             });
+    }
+
+    public selUsuario(usuario) {
+        this.usuarioService.usuario = usuario;
+        this.usuarioService.attAll();
+        this.navCtrl.push(UsuarioPage);
     }
 
     showError(text) {
