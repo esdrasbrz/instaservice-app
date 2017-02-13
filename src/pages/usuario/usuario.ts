@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { App, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { App, NavController, NavParams, AlertController, LoadingController, Loading, Navbar } from 'ionic-angular';
 
 import { AuthService } from '../../providers/auth-service';
 import { UsuarioService } from '../../providers/usuario-service';
@@ -20,6 +20,7 @@ import { SeguindoPage } from '../seguindo/seguindo';
   templateUrl: 'usuario.html'
 })
 export class UsuarioPage {
+    @ViewChild(Navbar) navBar: Navbar;
     loading: Loading;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -67,6 +68,16 @@ export class UsuarioPage {
             (err) => {
                 this.showError(err);
             });
+    }
+
+    // remove o usuário da pilha de usuarios e recarrega o conteúdo.
+    ionViewDidLoad() {
+        this.navBar.backButtonClick = (e: UIEvent) => {
+            this.usuarioService.usuario = this.usuarioService.usuariosPilha.pop();
+            this.usuarioService.attAll();
+
+            this.navCtrl.pop();
+        }
     }
 
     showLoading() {

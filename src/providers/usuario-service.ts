@@ -22,6 +22,7 @@ export class UsuarioService {
         bio: '',
         basic: ''
     };
+    public usuariosPilha: Array<any> = [];
 
     seguidores: any = [];
     seguindo: any = [];
