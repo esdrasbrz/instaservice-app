@@ -45,6 +45,30 @@ export class UsuarioPage {
         this.navCtrl.push(SeguindoPage);
     }
 
+    public seguir(id) {
+        this.usuarioService.seguir(id)
+            .then((data) => {
+                if (data['err']) {
+                    this.showError(data['err']);
+                }
+            },
+            (err) => {
+                this.showError(err);
+            });
+    }
+
+    public removerSeguir(id) {
+        this.usuarioService.removerSeguir(id)
+            .then((data) => {
+                if (data['err']) {
+                    this.showError(data['err']);
+                }
+            },
+            (err) => {
+                this.showError(err);
+            });
+    }
+
     showLoading() {
         this.loading = this.loadingCtrl.create({
             content: "Aguarde..."

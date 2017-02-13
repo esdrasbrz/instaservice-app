@@ -36,8 +36,15 @@
         </ion-col>
     </ion-row>
     <ion-row>
-        <ion-col>
-            <button ion-button color="light" outline block small (click)="abrirPerfil()" *ngIf="usuarioService.usuario.id == authService.usuario.id">Editar seu perfil</button>
+        <ion-col *ngIf="usuarioService.usuario.id === authService.usuario.id">
+            <button ion-button color="light" outline block small (click)="abrirPerfil()">Editar seu perfil</button>
+        </ion-col>
+
+        <ion-col small *ngIf="usuarioService.usuario.id !== authService.usuario.id">
+            <div [ngSwitch]="usuarioService.userSeguindo.includes(usuarioService.usuario.id)">
+                <button ion-button block small outline *ngSwitchCase="true" (click)="removerSeguir(usuarioService.usuario.id)">Seguindo</button>
+                <button ion-button block small *ngSwitchCase="false" (click)="seguir(usuarioService.usuario.id)">Seguir</button>
+            </div>
         </ion-col>
     </ion-row>
 
