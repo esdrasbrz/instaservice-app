@@ -47,11 +47,14 @@ export class SeguidoresPage {
     }
 
     public selUsuario(usuario) {
-        this.usuarioService.usuariosPilha.push(this.usuarioService.usuario);
-
-        this.usuarioService.usuario = usuario;
-        this.usuarioService.attAll();
-        this.navCtrl.push(UsuarioPage);
+        new Promise(resolve => {
+            this.usuarioService.usuariosPilha.push(this.usuarioService.usuario);
+            resolve();
+        }).then(data => {
+            this.usuarioService.usuario = usuario;
+            this.usuarioService.attAll();
+            this.navCtrl.push(UsuarioPage);
+        });
     }
 
     showError(text) {
