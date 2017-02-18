@@ -15,7 +15,7 @@ import { AuthService } from './auth-service';
 @Injectable()
 export class UsuarioService {
     private readonly TAM_PAG: number = 20;
-    private pag: number = 1;
+    private pagPesquisa: number = 1;
 
     public usuarios: Array<any> = [];
 
@@ -30,7 +30,12 @@ export class UsuarioService {
     public usuariosPilha: Array<any> = [];
 
     seguidores: any = [];
+    numSeguidores: string = '0';
+    private pagSeguidores: number = 1;
+
     seguindo: any = [];
+    numSeguindo: string = '0';
+    private pagSeguindo: number = 1;
 
     userSeguindo: Array<number> = [];
 
@@ -44,7 +49,7 @@ export class UsuarioService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.usuario.basic);
 
-        this.pag = 1;
+        this.pagPesquisa = 1;
         return new Promise(resolve => {
             this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/' + this.TAM_PAG + "/1/", { headers: headers })
                 .map(res => res.json())
@@ -66,9 +71,9 @@ export class UsuarioService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.usuario.basic);
 
-        this.pag += 1;
+        this.pagPesquisa += 1;
         return new Promise(resolve => {
-            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/' + this.TAM_PAG + "/" + this.pag, { headers: headers })
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/' + this.TAM_PAG + "/" + this.pagPesquisa, { headers: headers })
                 .map(res => res.json())
                 .subscribe(data => {
                     this.usuarios = this.usuarios.concat(data);
@@ -153,8 +158,18 @@ export class UsuarioService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.usuario.basic);
 
+        this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.usuario.id + '/seguindo/count/', { headers: headers })
+            .map(res => res.json())
+            .subscribe(data => {
+                this.numSeguindo = data[0].qtd;
+            },
+            err => {
+                this.numSeguindo = '0';
+            });
+
+        this.pagSeguindo = 1;
         return new Promise(resolve => {
-            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.usuario.id + '/seguindo/', { headers: headers })
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + this.usuario.id + '/seguindo/' + this.TAM_PAG + '/1/', { headers: headers })
                 .map(res => res.json())
                 .subscribe(data => {
                     this.seguindo = data;
