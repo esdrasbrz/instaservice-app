@@ -29,11 +29,26 @@ export class PesquisaPage {
                 .then(data => {
                     if (data['err']) {
                         this.showError("Um erro ocorreu!");
-                    } else {
-                        console.log(data);
                     }
                 },
                 err => {
+                    this.showError("Um erro ocorreu!");
+                });
+        }
+    }
+
+    public scroll(infiniteScroll) {
+        if (this.query != "") {
+            this.usuarioService.scrollPesquisa(this.query)
+                .then(data => {
+                    infiniteScroll.complete();
+
+                    if (data['err']) {
+                        this.showError("Um erro ocorreu!");
+                    }
+                },
+                err => {
+                    infiniteScroll.complete();
                     this.showError("Um erro ocorreu!");
                 });
         }

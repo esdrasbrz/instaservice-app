@@ -14,6 +14,9 @@ import { AuthService } from './auth-service';
 */
 @Injectable()
 export class UsuarioService {
+    private readonly TAM_PAG: number = 20;
+    private pag: number = 1;
+
     public usuarios: Array<any> = [];
 
     public usuario: any = {
@@ -41,8 +44,9 @@ export class UsuarioService {
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', this.authService.usuario.basic);
 
+        this.pag = 1;
         return new Promise(resolve => {
-            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/', { headers: headers })
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/' + this.TAM_PAG + "/1/", { headers: headers })
                 .map(res => res.json())
                 .subscribe(data => {
                     this.usuarios = data;
@@ -50,6 +54,27 @@ export class UsuarioService {
                 },
                 err => {
                     this.usuarios = [];
+                    resolve({
+                        err: 'Erro ao atualizar seguidores!'
+                    });
+                });
+        });
+    }
+
+    public scrollPesquisa(query) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.usuario.basic);
+
+        this.pag += 1;
+        return new Promise(resolve => {
+            this.http.get(this.configService.config.apis.usuarios + 'usuarios/' + query + '/search/' + this.TAM_PAG + "/" + this.pag, { headers: headers })
+                .map(res => res.json())
+                .subscribe(data => {
+                    this.usuarios = this.usuarios.concat(data);
+                    resolve(data);
+                },
+                err => {
                     resolve({
                         err: 'Erro ao atualizar seguidores!'
                     });
